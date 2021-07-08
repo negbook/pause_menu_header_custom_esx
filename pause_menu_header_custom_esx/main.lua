@@ -5,25 +5,38 @@ Citizen.CreateThread(function()
 		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 		Citizen.Wait(0)
 	end
-    AddTextEntry('FE_THDR_GTAO', 'Something V')
+    AddTextEntry('FE_THDR_GTAO', '教父 V')
     local a = RequestScaleformMovie('pause_menu_header')
+    local timer = 1000
     CreateThread(function()
         while true do 
-            if not HasScaleformMovieLoaded(a) then  a = RequestScaleformMovie('pause_menu_header') end 
-            
-            ESX.TriggerServerCallback('pause_menu_header_custom_esx:getinfo', function(infos)
-                if infos then 
-                    SetHeadingDetailsCustom("("..infos.id ..")".. infos.name,"Job:"..infos.job.label,"Cash: "..infos.money.." Bank: "..infos.bank.." BlackMoney: "..infos.blackmoney)
-                    
-                    SetHeaderTitle("Something V","Classic RolePlay")
-
-                end 
-                
-            end)
-            
-            Wait(1000)
+            if not HasScaleformMovieLoaded(a) then  
+                a = RequestScaleformMovie('pause_menu_header') 
+                timer = 100
+            end 
+            Wait(100)
         end 
     end)
+    CreateThread(function()
+        while true do 
+            if HasScaleformMovieLoaded(a) then  
+                ESX.TriggerServerCallback('pause_menu_header_custom_esx:getinfo', function(infos)
+                    if infos then 
+                        SetHeadingDetailsCustom("("..infos.id ..")".. infos.name,"工作: "..infos.job.label,"现金: "..infos.money.." 存款: "..infos.bank.." 黑钱: "..infos.blackmoney)
+                        
+                        SetHeaderTitle("教父 V","經典 RolePlay")
+                        if timer == 0 then 
+                            print(1)
+                            timer = 1000
+                        end 
+                    end 
+                    
+                end)
+            end 
+            Wait(timer)
+        end 
+    end)
+    
 end)
 
 

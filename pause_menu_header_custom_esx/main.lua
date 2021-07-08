@@ -5,22 +5,25 @@ Citizen.CreateThread(function()
 		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 		Citizen.Wait(0)
 	end
-
-	CreateThread(function()
-        while true do
+    AddTextEntry('FE_THDR_GTAO', 'Something V')
+    local a = RequestScaleformMovie('pause_menu_header')
+    CreateThread(function()
+        while true do 
+            if not HasScaleformMovieLoaded(a) then  a = RequestScaleformMovie('pause_menu_header') end 
             
             ESX.TriggerServerCallback('pause_menu_header_custom_esx:getinfo', function(infos)
                 if infos then 
                     SetHeadingDetailsCustom("("..infos.id ..")".. infos.name,"Job:"..infos.job.label,"Cash: "..infos.money.." Bank: "..infos.bank.." BlackMoney: "..infos.blackmoney)
                     
                     SetHeaderTitle("Something V","Classic RolePlay")
-                
+
                 end 
+                
             end)
+            
             Wait(1000)
         end 
-    end )
-
+    end)
 end)
 
 

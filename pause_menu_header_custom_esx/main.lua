@@ -22,7 +22,11 @@ Citizen.CreateThread(function()
             if HasScaleformMovieLoaded(a) then  
                 ESX.TriggerServerCallback('pause_menu_header_custom_esx:getinfo', function(infos)
                     if infos then 
-                        SetHeadingDetailsCustom("("..infos.id ..")".. infos.name,"Job: "..infos.job.label,"Cash: "..infos.money.." Bank: "..infos.bank.." Blackmoney: "..infos.blackmoney)
+                        SetHeadingDetailsCustom(
+							"("..infos.id ..")".. infos.name,
+							"Job: "..infos.job.label,
+							"Cash: "..infos.money.." Bank: "..infos.bank.." Blackmoney: "..infos.blackmoney
+                        )
                         
                         SetHeaderTitle("Something V","Classic RolePlay")
                         if timer == 0 then 
